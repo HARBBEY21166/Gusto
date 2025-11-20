@@ -1,3 +1,4 @@
+
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
@@ -48,16 +49,17 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative z-10 text-center px-4">
             <h1
-              className="font-headline text-4xl md:text-6xl font-bold"
-              style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}
+              className="font-headline text-4xl md:text-6xl font-bold animate-fade-in-up"
+              style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)', animationDelay: '0.2s' }}
             >
               Experience Culinary Excellence
             </h1>
-            <p className="font-body text-lg md:text-xl text-gray-200 max-w-xl mx-auto mt-4 mb-8">
+            <p className="font-body text-lg md:text-xl text-gray-200 max-w-xl mx-auto mt-4 mb-8 animate-fade-in-up"
+              style={{ animationDelay: '0.4s' }}>
               We craft unforgettable moments with locally sourced, seasonal
               ingredients.
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
               <Button asChild size="lg" className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
                 <Link href="/menu">View Our Menu</Link>
               </Button>

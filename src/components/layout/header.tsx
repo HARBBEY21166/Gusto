@@ -70,8 +70,10 @@ const Header = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" size="icon" aria-label="Log In">
-              <User className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
+            <Button asChild variant="ghost" size="icon" aria-label="Log In">
+              <Link href="/login">
+                <User className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
+              </Link>
             </Button>
             <Button asChild className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
               <Link href="/reservations">Reserve a Table</Link>
@@ -87,7 +89,9 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[340px] bg-card">
                 <SheetHeader className="mb-8">
-                  <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+                   <SheetTitle>
+                    <span className="sr-only">Mobile Menu</span>
+                  </SheetTitle>
                   <Logo />
                 </SheetHeader>
                 <div className="flex flex-col items-start gap-6">
@@ -97,9 +101,11 @@ const Header = () => {
                 </div>
                 <Separator className="my-8" />
                 <div className="flex flex-col gap-4">
-                   <Button variant="ghost" className="justify-start text-base">
-                     <User className="mr-2 h-5 w-5" />
-                     Log In
+                   <Button asChild variant="ghost" className="justify-start text-base">
+                     <Link href="/login">
+                       <User className="mr-2 h-5 w-5" />
+                       Log In
+                     </Link>
                    </Button>
                     <Button asChild className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
                       <Link href="/reservations">Reserve a Table</Link>

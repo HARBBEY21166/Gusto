@@ -17,6 +17,14 @@
       "price": ""
     },
     {
+      "id": "contact-hero",
+      "title": "Restaurant Exterior",
+      "description": "The welcoming exterior of the Gusto restaurant.",
+      "imageUrl": "https://images.unsplash.com/photo-1579738798595-3e1a6b8f5c8d?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "restaurant exterior",
+      "price": ""
+    },
+    {
       "id": "dish-1",
       "title": "Seared Scallops",
       "description": "Perfectly seared scallops with a lemon-butter sauce and fresh herbs.",

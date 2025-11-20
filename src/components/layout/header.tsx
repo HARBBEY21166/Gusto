@@ -75,8 +75,8 @@ const Header = () => {
                    Log In
                 </Button>
             </div>
-            <Button className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
-              Reserve a Table
+            <Button asChild className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
+              <Link href="/reservations">Reserve a Table</Link>
             </Button>
           </div>
 
@@ -103,8 +103,8 @@ const Header = () => {
                            Log In
                         </Button>
                     </div>
-                    <Button className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
-                      Reserve a Table
+                    <Button asChild className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
+                      <Link href="/reservations">Reserve a Table</Link>
                     </Button>
                 </div>
               </SheetContent>

@@ -60,6 +60,12 @@ export default function ReservationsPage() {
 
   const form = useForm<z.infer<typeof reservationSchema>>({
     resolver: zodResolver(reservationSchema),
+    defaultValues: {
+      phone: '',
+      requests: '',
+      time: '',
+      partySize: '',
+    },
   });
 
   function onSubmit(data: z.infer<typeof reservationSchema>) {
@@ -68,7 +74,7 @@ export default function ReservationsPage() {
       title: 'Reservation Submitted!',
       description: 'We have received your request and will confirm shortly.',
     });
-    form.reset({ phone: '', requests: '' });
+    form.reset();
     router.push('/reservations/thank-you');
   }
 

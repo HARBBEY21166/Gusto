@@ -9,6 +9,8 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Leaf, Users, Star } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function AboutPage() {
   const aboutHeroImage = PlaceHolderImages.find(p => p.id === 'about-hero');
@@ -166,6 +168,20 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-primary-gradient text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="font-headline text-4xl font-bold">
+              Become a Part of Our Story
+            </h2>
+            <p className="font-body text-lg text-gray-200 mt-4 mb-8 max-w-xl mx-auto">
+              Come and create your own memories at our table.
+            </p>
+            <Button asChild size="lg" className="bg-secondary-gradient text-white font-bold hover:opacity-90 transition-opacity">
+              <Link href="/reservations">Reserve Your Table</Link>
+            </Button>
           </div>
         </section>
 

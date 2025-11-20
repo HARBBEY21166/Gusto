@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Calendar as CalendarIcon, Clock, Users, Phone, Pencil } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Users, Phone, Pencil, CalendarX } from 'lucide-react';
 
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
@@ -74,6 +74,24 @@ export default function ReservationsPage() {
     const minute = i % 2 === 0 ? '00' : '30';
     return `${hour}:${minute}`;
   });
+
+  const infoItems = [
+    {
+      icon: Clock,
+      title: "Running Late?",
+      text: "Please call us. We will hold your table for 15 minutes."
+    },
+    {
+      icon: CalendarX,
+      title: "Change of Plans?",
+      text: "We kindly request 24 hours notice for cancellations."
+    },
+    {
+      icon: Users,
+      title: "Large Party?",
+      text: "For groups larger than 8, please call us directly."
+    }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -249,11 +267,23 @@ export default function ReservationsPage() {
             </Card>
           </div>
         </section>
+
+        <section className="py-20 bg-card">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-3 gap-12 text-center">
+              {infoItems.map((item, index) => (
+                <div key={index} className="flex flex-col items-center">
+                  <item.icon className="w-10 h-10 text-primary mb-4" />
+                  <h3 className="font-headline text-2xl font-bold text-foreground">{item.title}</h3>
+                  <p className="font-body text-muted-foreground mt-2 max-w-xs">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
         
       </main>
       <Footer />
     </div>
   );
 }
-
-    

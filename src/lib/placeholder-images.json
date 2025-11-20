@@ -9,6 +9,14 @@
       "price": ""
     },
     {
+      "id": "menu-hero",
+      "title": "Menu Hero",
+      "description": "A delicious plate of pasta, signaling the menu page.",
+      "imageUrl": "https://images.unsplash.com/photo-1598866594240-a7df2041d0c2?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "pasta dish",
+      "price": ""
+    },
+    {
       "id": "dish-1",
       "title": "Seared Scallops",
       "description": "Perfectly seared scallops with a lemon-butter sauce and fresh herbs.",

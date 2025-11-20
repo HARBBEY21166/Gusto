@@ -8,7 +8,7 @@ import { Menu, User } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetHeader } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import Logo from '@/components/logo';
 import { Separator } from '../ui/separator';
 
@@ -87,6 +87,7 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[340px] bg-card">
                 <SheetHeader className="mb-8">
+                  <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                   <Logo />
                 </SheetHeader>
                 <div className="flex flex-col items-start gap-6">

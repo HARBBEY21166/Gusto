@@ -1,4 +1,7 @@
 
+'use client';
+
+import React from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
@@ -8,6 +11,29 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useInView } from '@/hooks/use-in-view';
+
+const AnimatedCard = ({ children, className, delay }: { children: React.ReactNode, className?: string, delay?: number }) => {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'transition-all duration-700 ease-out',
+        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+        className
+      )}
+      style={{ transitionDelay: `${delay || 0}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
+
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-dish');
@@ -83,35 +109,32 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {featuredDishes.map((dish, index) => (
-                <Card 
-                  key={dish.id} 
-                  className={cn(
-                    "bg-card overflow-hidden shadow-subtle border-none rounded-lg animate-fade-in-up",
-                    `stagger-delay-${(index + 1) * 200}`
-                  )}
-                  style={{animationFillMode: 'forwards', opacity: 0}}
-                >
-                  <div className="relative aspect-square">
-                    <Image
-                      src={dish.imageUrl}
-                      alt={dish.description}
-                      fill
-                      className="object-cover"
-                      data-ai-hint={dish.imageHint}
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="font-headline text-2xl font-bold text-foreground">
-                      {dish.title}
-                    </h3>
-                    <p className="font-body text-sm text-muted-foreground mt-2">
-                      {dish.description}
-                    </p>
-                    <p className="font-body font-bold text-lg mt-4 text-gradient-secondary">
-                      {dish.price}
-                    </p>
-                  </CardContent>
-                </Card>
+                <AnimatedCard key={dish.id} delay={index * 150}>
+                  <Card 
+                    className="bg-card overflow-hidden shadow-subtle border-none rounded-lg h-full"
+                  >
+                    <div className="relative aspect-square">
+                      <Image
+                        src={dish.imageUrl}
+                        alt={dish.description}
+                        fill
+                        className="object-cover"
+                        data-ai-hint={dish.imageHint}
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <h3 className="font-headline text-2xl font-bold text-foreground">
+                        {dish.title}
+                      </h3>
+                      <p className="font-body text-sm text-muted-foreground mt-2">
+                        {dish.description}
+                      </p>
+                      <p className="font-body font-bold text-lg mt-4 text-gradient-secondary">
+                        {dish.price}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </AnimatedCard>
               ))}
             </div>
           </div>
@@ -161,37 +184,32 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
-                <Card 
-                  key={index}
-                  className={cn(
-                    "bg-card shadow-subtle border-none rounded-lg text-center animate-fade-in-up",
-                    `stagger-delay-${(index + 1) * 200}`
-                  )}
-                  style={{animationFillMode: 'forwards', opacity: 0}}
-                >
-                  <CardContent className="p-8 flex flex-col items-center justify-center">
-                    <p className="font-body italic text-muted-foreground">
-                      "{testimonial.quote}"
-                    </p>
-                    <div className="flex gap-1 my-4">
-                      {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 text-transparent bg-clip-text bg-secondary-gradient" fill="url(#star-gradient)" />
-                      ))}
-                      <svg width="0" height="0">
-                          <defs>
-                              <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                  <stop offset="0%" style={{stopColor: '#f093fb'}} />
-                                  <stop offset="100%" style={{stopColor: '#f5576c'}} />
-                              </linearGradient>
-                          </defs>
-                      </svg>
-                    </div>
-                    <h4 className="font-headline text-lg font-bold text-foreground">
-                      &mdash; {testimonial.author}
-                    </h4>
-                    <p className="font-body text-sm text-gray-400">{testimonial.title}</p>
-                  </CardContent>
-                </Card>
+                 <AnimatedCard key={index} delay={index * 150}>
+                    <Card className="bg-card shadow-subtle border-none rounded-lg text-center h-full">
+                      <CardContent className="p-8 flex flex-col items-center justify-center">
+                        <p className="font-body italic text-muted-foreground">
+                          "{testimonial.quote}"
+                        </p>
+                        <div className="flex gap-1 my-4">
+                          {[...Array(5)].map((_, i) => (
+                              <Star key={i} className="w-5 h-5 text-transparent bg-clip-text bg-secondary-gradient" fill="url(#star-gradient)" />
+                          ))}
+                          <svg width="0" height="0">
+                              <defs>
+                                  <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                      <stop offset="0%" style={{stopColor: '#f093fb'}} />
+                                      <stop offset="100%" style={{stopColor: '#f5576c'}} />
+                                  </linearGradient>
+                              </defs>
+                          </svg>
+                        </div>
+                        <h4 className="font-headline text-lg font-bold text-foreground">
+                          &mdash; {testimonial.author}
+                        </h4>
+                        <p className="font-body text-sm text-gray-400">{testimonial.title}</p>
+                      </CardContent>
+                    </Card>
+                </AnimatedCard>
               ))}
             </div>
           </div>

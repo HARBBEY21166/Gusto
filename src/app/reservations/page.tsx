@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -54,6 +55,7 @@ const reservationSchema = z.object({
 
 export default function ReservationsPage() {
   const { toast } = useToast();
+  const router = useRouter();
   const reservationsHeroImage = PlaceHolderImages.find(p => p.id === 'reservations-hero');
 
   const form = useForm<z.infer<typeof reservationSchema>>({
@@ -67,6 +69,7 @@ export default function ReservationsPage() {
       description: 'We have received your request and will confirm shortly.',
     });
     form.reset({ phone: '', requests: '' });
+    router.push('/reservations/thank-you');
   }
 
   const timeSlots = Array.from({ length: 12 }, (_, i) => {

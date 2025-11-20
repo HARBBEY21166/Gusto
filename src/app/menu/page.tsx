@@ -10,6 +10,8 @@ import { ImagePlaceholder, PlaceHolderImages } from '@/lib/placeholder-images';
 import MenuNav from '@/components/menu-nav';
 import { Leaf, Flame, WheatOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 type MenuItem = {
   name: string;
@@ -187,6 +189,25 @@ export default function MenuPage() {
               image={category.image}
             />
         ))}
+
+        <section className="py-20 bg-muted">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="font-headline text-4xl font-bold text-foreground">
+              Hungry Yet?
+            </h2>
+            <p className="font-body text-lg text-muted-foreground mt-2 mb-8">
+              Your table is waiting.
+            </p>
+            <div className="flex justify-center gap-4">
+              <Button asChild size="lg" className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
+                <Link href="/reservations">Reserve a Table</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                <Link href="#">View Full Menu (PDF)</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
 
       </main>
       <Footer />

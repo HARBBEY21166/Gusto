@@ -47,6 +47,38 @@
       "imageUrl": "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "restaurant interior",
       "price": ""
+    },
+    {
+      "id": "menu-appetizers",
+      "title": "Appetizers Spread",
+      "description": "A vibrant spread of delicious appetizers.",
+      "imageUrl": "https://images.unsplash.com/photo-1504754524776-8f4f37790774?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "appetizer spread",
+      "price": ""
+    },
+    {
+      "id": "menu-main-courses",
+      "title": "Main Course",
+      "description": "A hearty main course beautifully plated.",
+      "imageUrl": "https://images.unsplash.com/photo-1559847844-5315695d0e66?q=80&w=1964&auto=format&fit=crop",
+      "imageHint": "main course",
+      "price": ""
+    },
+    {
+      "id": "menu-desserts",
+      "title": "Dessert Selection",
+      "description": "A delectable dessert to finish the meal.",
+      "imageUrl": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=1965&auto=format&fit=crop",
+      "imageHint": "dessert selection",
+      "price": ""
+    },
+    {
+      "id": "menu-drinks",
+      "title": "Cocktails",
+      "description": "A refreshing and colorful cocktail.",
+      "imageUrl": "https://images.unsplash.com/photo-1551024709-8f23befc6f81?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "cocktails",
+      "price": ""
     }
   ]
 }

@@ -4,11 +4,30 @@ import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
+import { Star } from 'lucide-react';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-dish');
   const featuredDishes = PlaceHolderImages.filter(p => p.id.startsWith('dish-'));
   const storyImage = PlaceHolderImages.find(p => p.id === 'our-story-image');
+
+  const testimonials = [
+    {
+      quote: "The best dining experience I've had this year! The scallop dish was out of this world.",
+      author: "Alex Johnson",
+      title: "Local Food Critic",
+    },
+    {
+      quote: "An absolute gem. The ambiance is perfect for a special occasion, and the service is impeccable.",
+      author: "Samantha Bee",
+      title: "Lifestyle Blogger",
+    },
+    {
+      quote: "Every dish is a work of art. You can taste the passion and quality in every single bite. Highly recommended!",
+      author: "Michael Ren",
+      title: "Happy Customer",
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -118,6 +137,48 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <section className="py-20 bg-muted">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="font-headline text-4xl font-bold text-foreground">
+                What Our Guests Say
+              </h2>
+              <p className="font-body text-lg text-muted-foreground mt-2">
+                Don't just take our word for it.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <Card key={index} className="bg-card shadow-subtle border-none rounded-lg text-center">
+                  <CardContent className="p-8 flex flex-col items-center justify-center">
+                    <p className="font-body italic text-muted-foreground">
+                      "{testimonial.quote}"
+                    </p>
+                    <div className="flex gap-1 my-4">
+                      {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 text-transparent bg-clip-text bg-secondary-gradient" fill="url(#star-gradient)" />
+                      ))}
+                      <svg width="0" height="0">
+                          <defs>
+                              <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                  <stop offset="0%" style={{stopColor: '#f093fb'}} />
+                                  <stop offset="100%" style={{stopColor: '#f5576c'}} />
+                              </linearGradient>
+                          </defs>
+                      </svg>
+                    </div>
+                    <h4 className="font-headline text-lg font-bold text-foreground">
+                      &mdash; {testimonial.author}
+                    </h4>
+                    <p className="font-body text-sm text-gray-400">{testimonial.title}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
     </div>
   );

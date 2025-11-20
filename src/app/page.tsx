@@ -161,7 +161,14 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-card shadow-subtle border-none rounded-lg text-center">
+                <Card 
+                  key={index}
+                  className={cn(
+                    "bg-card shadow-subtle border-none rounded-lg text-center animate-fade-in-up",
+                    `stagger-delay-${(index + 1) * 200}`
+                  )}
+                  style={{animationFillMode: 'forwards', opacity: 0}}
+                >
                   <CardContent className="p-8 flex flex-col items-center justify-center">
                     <p className="font-body italic text-muted-foreground">
                       "{testimonial.quote}"

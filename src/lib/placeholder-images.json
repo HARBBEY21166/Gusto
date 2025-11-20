@@ -119,6 +119,14 @@
       "imageUrl": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "fresh ingredients",
       "price": ""
+    },
+    {
+      "id": "about-tradition",
+      "title": "Old Recipe Book",
+      "description": "An old, handwritten recipe book, suggesting tradition and family history.",
+      "imageUrl": "https://images.unsplash.com/photo-1598515750917-ef8392c6d486?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "recipe book",
+      "price": ""
     }
   ]
 }

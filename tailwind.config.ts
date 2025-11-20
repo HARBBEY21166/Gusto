@@ -12,6 +12,7 @@ export default {
       fontFamily: {
         body: ['Lato', 'sans-serif'],
         headline: ['Playfair Display', 'serif'],
+        signature: ['Dancing Script', 'cursive'],
         code: ['monospace'],
       },
       colors: {

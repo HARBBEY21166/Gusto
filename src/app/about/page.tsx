@@ -6,9 +6,12 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function AboutPage() {
   const aboutHeroImage = PlaceHolderImages.find(p => p.id === 'about-hero');
+  const traditionImage = PlaceHolderImages.find(p => p.id === 'about-tradition');
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -41,11 +44,44 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Placeholder for future sections */}
-        <div className="container mx-auto px-4 py-20 text-center">
-            <h2 className="font-headline text-3xl font-bold text-foreground mb-4">The Journey of Gusto</h2>
+        <section className="py-20 bg-card">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-subtle">
+                {traditionImage && (
+                    <Image
+                      src={traditionImage.imageUrl}
+                      alt={traditionImage.description}
+                      fill
+                      className="object-cover"
+                      data-ai-hint={traditionImage.imageHint}
+                    />
+                )}
+              </div>
+              <div className="flex flex-col justify-center text-left">
+                <h2 className="font-headline text-4xl font-bold text-gradient-primary">
+                  A Family Tradition
+                </h2>
+                <div className="font-body text-base text-muted-foreground mt-6 space-y-4 max-w-prose">
+                  <p>
+                    Gusto was born from a lifetime of memories around the family table. Our head chef and founder, Alessandro, learned the secrets of flavor from his grandmother in a sun-drenched kitchen in Tuscany. For us, food is more than sustenance; it's a language of love and heritage.
+                  </p>
+                  <p>
+                    We opened Gusto in 2010 to share that feeling with our community, creating a place where every guest is treated like family and every dish tells a story.
+                  </p>
+                </div>
+                <p className="font-signature text-5xl text-foreground mt-6">
+                  Alessandro
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <div className="container mx-auto px-4 py-20 text-center bg-muted">
+            <h2 className="font-headline text-3xl font-bold text-foreground mb-4">The Journey of Gusto Continues</h2>
             <p className="font-body text-lg text-muted-foreground max-w-3xl mx-auto">
-                Content about the restaurant's history, philosophy, and team will be placed here. Check back soon for the full story!
+                More about our philosophy and team will be placed here. Check back soon for the full story!
             </p>
         </div>
 

@@ -156,9 +156,9 @@ export default function AboutPage() {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {teamMembers.map((member) => (
-                <div key={member.id} className="flex flex-col items-center text-center">
+                <div key={member.id} className="flex flex-col items-center text-center group">
                   {member.image && (
-                    <Avatar className="w-40 h-40 mb-4 border-4 border-card shadow-subtle">
+                    <Avatar className="w-40 h-40 mb-4 border-4 border-card shadow-subtle transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
                       <AvatarImage src={member.image.imageUrl} alt={`Headshot of ${member.name}`} />
                       <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
                     </Avatar>

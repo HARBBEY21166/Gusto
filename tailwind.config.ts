@@ -75,6 +75,7 @@ export default {
       },
       boxShadow: {
         subtle: '0 4px 12px rgba(0, 0, 0, 0.05)',
+        xl: '0 10px 25px rgba(0, 0, 0, 0.1)',
       },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(to right, #667eea, #764ba2)',

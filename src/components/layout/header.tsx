@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
+import { Menu, User } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -69,12 +69,10 @@ const Header = () => {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-2">
-            <div className="p-[1.5px] bg-secondary-gradient rounded-md">
-                <Button variant="ghost" className="bg-card text-gradient-secondary font-bold w-full h-full hover:bg-card/90">
-                   Log In
-                </Button>
-            </div>
+          <div className="hidden md:flex items-center gap-4">
+            <Button variant="ghost" size="icon" aria-label="Log In">
+              <User className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
+            </Button>
             <Button asChild className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
               <Link href="/reservations">Reserve a Table</Link>
             </Button>
@@ -98,11 +96,10 @@ const Header = () => {
                 </div>
                 <Separator className="my-8" />
                 <div className="flex flex-col gap-4">
-                   <div className="p-[1.5px] bg-secondary-gradient rounded-md">
-                        <Button variant="ghost" className="bg-card text-gradient-secondary font-bold w-full h-full hover:bg-card/90">
-                           Log In
-                        </Button>
-                    </div>
+                   <Button variant="ghost" className="justify-start text-base">
+                     <User className="mr-2 h-5 w-5" />
+                     Log In
+                   </Button>
                     <Button asChild className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
                       <Link href="/reservations">Reserve a Table</Link>
                     </Button>

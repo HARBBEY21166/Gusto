@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        body: ['Lato', 'sans-serif'],
+        headline: ['Playfair Display', 'serif'],
         code: ['monospace'],
       },
       colors: {
@@ -68,8 +68,15 @@ export default {
       },
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
+        md: 'var(--radius)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      boxShadow: {
+        subtle: '0 4px 12px rgba(0, 0, 0, 0.05)',
+      },
+      backgroundImage: {
+        'primary-gradient': 'linear-gradient(to right, #667eea, #764ba2)',
+        'secondary-gradient': 'linear-gradient(to right, #f093fb, #f5576c)',
       },
       keyframes: {
         'accordion-down': {

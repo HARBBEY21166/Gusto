@@ -6,6 +6,9 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Button } from '@/components/ui/button';
+import { MapPin, Clock, Phone, Mail } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ContactPage() {
   const contactHeroImage = PlaceHolderImages.find(p => p.id === 'contact-hero');
@@ -39,8 +42,74 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Other sections will go here */}
-        
+        <section className="py-20 bg-card">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Left Column: Contact Info */}
+              <div className="flex flex-col gap-8">
+                <h2 className="font-headline text-4xl font-bold text-foreground">Visit Us</h2>
+                
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-start gap-4">
+                    <MapPin className="w-6 h-6 text-primary mt-1 shrink-0" />
+                    <div>
+                      <h3 className="font-body font-bold text-foreground">Address</h3>
+                      <p className="text-muted-foreground">123 Main Street, City, State 12345</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <Clock className="w-6 h-6 text-primary mt-1 shrink-0" />
+                    <div>
+                      <h3 className="font-body font-bold text-foreground">Hours</h3>
+                      <p className="text-muted-foreground">Mon-Thu: 11am - 10pm</p>
+                      <p className="text-muted-foreground">Fri-Sat: 11am - 11pm</p>
+                      <p className="text-muted-foreground">Sunday: 10am - 9pm</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <Phone className="w-6 h-6 text-primary mt-1 shrink-0" />
+                    <div>
+                      <h3 className="font-body font-bold text-foreground">Phone</h3>
+                      <p className="text-muted-foreground">(555) 123-4567</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <Mail className="w-6 h-6 text-primary mt-1 shrink-0" />
+                    <div>
+                      <h3 className="font-body font-bold text-foreground">Email</h3>
+                      <p className="text-muted-foreground">hello@gustorestaurant.com</p>
+                    </div>
+                  </div>
+                </div>
+
+                <Button asChild size="lg" className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity self-start">
+                  <Link href="https://www.google.com/maps/search/?api=1&query=123+Main+Street+City+State+12345" target="_blank">
+                    Get Directions
+                  </Link>
+                </Button>
+              </div>
+
+              {/* Right Column: Interactive Map */}
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-subtle">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.257797799516!2d-122.41941548468115!3d37.77492957975873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c4c16a3e5%3A0x4c7d5c2e3a6a42a6!2sSan%20Francisco%20City%20Hall!5e0!3m2!1sen!2sus!4v1678886400000!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Google Map of Restaurant Location"
+                  className="absolute inset-0"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
       <Footer />
     </div>

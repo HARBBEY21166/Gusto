@@ -6,12 +6,30 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Leaf, Users, Star } from 'lucide-react';
 
 export default function AboutPage() {
   const aboutHeroImage = PlaceHolderImages.find(p => p.id === 'about-hero');
   const traditionImage = PlaceHolderImages.find(p => p.id === 'about-tradition');
+
+  const values = [
+    {
+      icon: Leaf,
+      title: 'Locally Sourced',
+      description: 'We forge direct relationships with local farmers and fishermen to ensure the freshest, most sustainable ingredients arrive on your plate.',
+    },
+    {
+      icon: Users,
+      title: 'Community Focused',
+      description: 'We are more than a restaurant; we are a gathering place for friends and family. We are committed to supporting and enriching our local community.',
+    },
+    {
+      icon: Star,
+      title: 'Masterful Craft',
+      description: 'Every dish is a testament to our dedication to the craft of cooking. We honor traditional techniques while embracing creative innovation.',
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -78,12 +96,34 @@ export default function AboutPage() {
           </div>
         </section>
         
-        <div className="container mx-auto px-4 py-20 text-center bg-muted">
-            <h2 className="font-headline text-3xl font-bold text-foreground mb-4">The Journey of Gusto Continues</h2>
-            <p className="font-body text-lg text-muted-foreground max-w-3xl mx-auto">
-                More about our philosophy and team will be placed here. Check back soon for the full story!
-            </p>
-        </div>
+        <section className="py-20 bg-muted">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="font-headline text-4xl font-bold text-foreground">
+                Our Promise
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {values.map((value, index) => (
+                <Card key={index} className="bg-card shadow-subtle border-none rounded-lg text-center">
+                  <CardHeader>
+                    <div className="mx-auto bg-primary-gradient p-3 rounded-full w-fit">
+                      <value.icon className="w-8 h-8 text-primary-foreground" />
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex flex-col items-center justify-center">
+                    <CardTitle className="font-headline text-2xl font-bold text-foreground">
+                      {value.title}
+                    </CardTitle>
+                    <p className="font-body text-muted-foreground mt-4">
+                      {value.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
 
       </main>
       <Footer />

@@ -113,11 +113,27 @@
       "price": ""
     },
     {
-      "id": "about-values",
+      "id": "about-values-local",
       "title": "Fresh Ingredients",
       "description": "A shot of fresh, locally sourced ingredients.",
       "imageUrl": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "fresh ingredients",
+      "price": ""
+    },
+    {
+      "id": "about-values-community",
+      "title": "Community Gathering",
+      "description": "People enjoying a meal together at a community event.",
+      "imageUrl": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "community gathering",
+      "price": ""
+    },
+    {
+      "id": "about-values-craft",
+      "title": "Chef Plating",
+      "description": "A chef carefully plating a dish with precision.",
+      "imageUrl": "https://images.unsplash.com/photo-1556911220-e15b29be8c9f?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "chef plating",
       "price": ""
     },
     {

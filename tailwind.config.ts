@@ -1,4 +1,5 @@
 import type {Config} from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   darkMode: ['class'],
@@ -110,9 +111,20 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+        'fade-in-up': 'fade-in-up 0.6s ease-out',
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    plugin(function({ addUtilities }) {
+      const newUtilities: Record<string, React.CSSProperties> = {};
+      for (let i=1; i<=10; i++) {
+        newUtilities[`.stagger-delay-${i*100}`] = { 
+          animationDelay: `${i*100}ms`
+        };
+      }
+      addUtilities(newUtilities);
+    })
+  ],
 } satisfies Config;

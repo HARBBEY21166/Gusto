@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
 import { Star } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-dish');
@@ -81,8 +82,15 @@ export default function Home() {
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
-              {featuredDishes.map((dish) => (
-                <Card key={dish.id} className="bg-card overflow-hidden shadow-subtle border-none rounded-lg">
+              {featuredDishes.map((dish, index) => (
+                <Card 
+                  key={dish.id} 
+                  className={cn(
+                    "bg-card overflow-hidden shadow-subtle border-none rounded-lg animate-fade-in-up",
+                    `stagger-delay-${(index + 1) * 200}`
+                  )}
+                  style={{animationFillMode: 'forwards', opacity: 0}}
+                >
                   <div className="relative aspect-square">
                     <Image
                       src={dish.imageUrl}

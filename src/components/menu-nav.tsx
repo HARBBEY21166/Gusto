@@ -25,8 +25,11 @@ const MenuNav = () => {
     const handleScroll = () => {
       const nav = navRef.current;
       if (nav) {
-        const sticky = nav.offsetTop;
-        if (window.pageYOffset > sticky) {
+        // Use getBoundingClientRect().top to know when the top of the nav hits the top of the viewport
+        const navTop = nav.getBoundingClientRect().top;
+        // The header height is 5rem (80px), or h-20 in tailwind.
+        // We make it sticky when the nav is about to scroll past the header.
+        if (navTop <= 80) { 
           setIsSticky(true);
         } else {
           setIsSticky(false);
@@ -64,7 +67,11 @@ const MenuNav = () => {
   };
 
   return (
-    <div ref={navRef} className={cn('bg-card transition-shadow duration-200', isSticky ? 'sticky top-20 z-40 shadow-md' : 'relative')}>
+    <div ref={navRef} className={cn('bg-card transition-shadow duration-200 sticky z-40 top-20',
+      isSticky 
+        ? 'shadow-md translate-y-0' 
+        : '-translate-y-full shadow-none'
+    )}>
       <div className="container mx-auto px-4">
         <div className="flex justify-center items-center h-16 gap-8">
           {menuCategories.map(category => (

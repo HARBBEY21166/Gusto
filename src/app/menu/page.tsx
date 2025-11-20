@@ -12,6 +12,7 @@ import { Leaf, Flame, WheatOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useInView } from '@/hooks/use-in-view';
 
 type MenuItem = {
   name: string;
@@ -93,9 +94,38 @@ const TagIcon = ({ tag }: { tag: 'v' | 'gf' | 'spicy' }) => {
   return <Icon className="w-4 h-4 text-muted-foreground" title={label} />;
 };
 
+const AnimatedMenuItem = ({ item, index }: { item: MenuItem; index: number }) => {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'transition-all duration-500 ease-out',
+        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      )}
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <h3 className="font-headline text-2xl font-bold text-foreground">{item.name}</h3>
+          <div className="flex gap-2">
+            {item.tags?.map(tag => <TagIcon key={tag} tag={tag} />)}
+          </div>
+        </div>
+        <p className="font-headline text-2xl font-bold text-gradient-secondary ml-4">{item.price}</p>
+      </div>
+      <p className="text-muted-foreground mt-2 font-body text-base max-w-md">{item.description}</p>
+    </div>
+  );
+};
+
 
 const MenuCategorySection = ({ id, title, items, image }: MenuCategory) => (
-  <section id={id} className="py-20 bg-background">
+  <section id={id} className="py-20 bg-background overflow-hidden">
     <div className="container mx-auto px-4">
       <div className="text-center mb-12">
         <h2 className="font-headline text-4xl font-bold text-foreground">{title}</h2>
@@ -106,18 +136,7 @@ const MenuCategorySection = ({ id, title, items, image }: MenuCategory) => (
           'lg:order-last': id === 'desserts',
         })}>
           {items.map((item, index) => (
-            <div key={index}>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <h3 className="font-headline text-2xl font-bold text-foreground">{item.name}</h3>
-                  <div className="flex gap-2">
-                    {item.tags?.map(tag => <TagIcon key={tag} tag={tag} />)}
-                  </div>
-                </div>
-                <p className="font-headline text-2xl font-bold text-gradient-secondary ml-4">{item.price}</p>
-              </div>
-              <p className="text-muted-foreground mt-2 font-body text-base max-w-md">{item.description}</p>
-            </div>
+            <AnimatedMenuItem key={index} item={item} index={index} />
           ))}
         </div>
         <div className={cn("relative aspect-[4/3] rounded-lg overflow-hidden shadow-subtle order-first", {

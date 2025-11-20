@@ -1,3 +1,10 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-dish",
+      "description": "A beautifully plated gourmet dish, showcasing culinary artistry.",
+      "imageUrl": "https://images.unsplash.com/photo-1676300184892-af5c95f9dbe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxnb3VybWV0JTIwZGlzaHxlbnwwfHx8fDE3NjM1NDM2MzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gourmet dish"
+    }
+  ]
 }

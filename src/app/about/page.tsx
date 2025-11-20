@@ -127,7 +127,7 @@ export default function AboutPage() {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {values.map((value, index) => (
-                <Card key={index} className="bg-card shadow-subtle border-none rounded-lg text-center">
+                <Card key={index} className="bg-card shadow-subtle border-none rounded-lg text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                   <CardHeader>
                     <div className="mx-auto bg-primary-gradient p-3 rounded-full w-fit">
                       <value.icon className="w-8 h-8 text-primary-foreground" />

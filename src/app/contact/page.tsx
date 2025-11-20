@@ -116,7 +116,7 @@ export default function ContactPage() {
 
         <section className="py-20 bg-muted">
           <div className="container mx-auto px-4">
-            <Card className="max-w-3xl mx-auto bg-card shadow-subtle border-none rounded-lg">
+            <Card className="max-w-3xl mx-auto bg-card shadow-subtle border-none rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
               <CardHeader className="text-center">
                 <CardTitle className="font-headline text-4xl font-bold text-foreground">Send Us a Message</CardTitle>
                 <CardDescription className="font-body text-lg text-muted-foreground pt-2">

@@ -111,7 +111,7 @@ export default function Home() {
               {featuredDishes.map((dish, index) => (
                 <AnimatedCard key={dish.id} delay={index * 150}>
                   <Card 
-                    className="bg-card overflow-hidden shadow-subtle border-none rounded-lg h-full"
+                    className="bg-card overflow-hidden shadow-subtle border-none rounded-lg h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
                   >
                     <div className="relative aspect-square">
                       <Image
@@ -185,7 +185,7 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
                  <AnimatedCard key={index} delay={index * 150}>
-                    <Card className="bg-card shadow-subtle border-none rounded-lg text-center h-full">
+                    <Card className="bg-card shadow-subtle border-none rounded-lg text-center h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                       <CardContent className="p-8 flex flex-col items-center justify-center">
                         <p className="font-body italic text-muted-foreground">
                           "{testimonial.quote}"

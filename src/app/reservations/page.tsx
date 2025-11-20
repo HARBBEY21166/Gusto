@@ -127,7 +127,7 @@ export default function ReservationsPage() {
 
         <section className="py-20 bg-muted">
           <div className="container mx-auto px-4">
-            <Card className="max-w-4xl mx-auto bg-card shadow-subtle border-none rounded-lg">
+            <Card className="max-w-4xl mx-auto bg-card shadow-subtle border-none rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
               <CardHeader className="text-center pt-8">
                 <CardTitle className="font-headline text-4xl font-bold text-foreground">Book a Table</CardTitle>
               </CardHeader>

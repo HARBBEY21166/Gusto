@@ -143,6 +143,30 @@
       "imageUrl": "https://images.unsplash.com/photo-1598515750917-ef8392c6d486?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "recipe book",
       "price": ""
+    },
+    {
+      "id": "team-head-chef",
+      "title": "Alessandro",
+      "description": "Head Chef & Founder",
+      "imageUrl": "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=800&h=800&fit=crop",
+      "imageHint": "male chef",
+      "price": ""
+    },
+    {
+      "id": "team-general-manager",
+      "title": "Isabella",
+      "description": "General Manager",
+      "imageUrl": "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?q=80&w=800&h=800&fit=crop",
+      "imageHint": "female manager",
+      "price": ""
+    },
+    {
+      "id": "team-pastry-chef",
+      "title": "Marco",
+      "description": "Pastry Chef",
+      "imageUrl": "https://images.unsplash.com/photo-1559526350-659f0f97a54c?q=80&w=800&h=800&fit=crop",
+      "imageHint": "male pastry",
+      "price": ""
     }
   ]
 }

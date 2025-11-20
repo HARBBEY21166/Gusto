@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Leaf, Users, Star } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function AboutPage() {
   const aboutHeroImage = PlaceHolderImages.find(p => p.id === 'about-hero');
@@ -30,6 +31,25 @@ export default function AboutPage() {
       description: 'Every dish is a testament to our dedication to the craft of cooking. We honor traditional techniques while embracing creative innovation.',
     },
   ];
+
+  const teamMembers = [
+    {
+      id: 'team-head-chef',
+      name: 'Alessandro',
+      title: 'Head Chef & Founder',
+    },
+    {
+      id: 'team-general-manager',
+      name: 'Isabella',
+      title: 'General Manager',
+    },
+    {
+      id: 'team-pastry-chef',
+      name: 'Marco',
+      title: 'Pastry Chef',
+    }
+  ].map(member => ({ ...member, image: PlaceHolderImages.find(p => p.id === member.id) }));
+
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -120,6 +140,30 @@ export default function AboutPage() {
                     </p>
                   </CardContent>
                 </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="font-headline text-4xl font-bold text-foreground">
+                Meet The Family
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {teamMembers.map((member) => (
+                <div key={member.id} className="flex flex-col items-center text-center">
+                  {member.image && (
+                    <Avatar className="w-40 h-40 mb-4 border-4 border-card shadow-subtle">
+                      <AvatarImage src={member.image.imageUrl} alt={`Headshot of ${member.name}`} />
+                      <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                  )}
+                  <h3 className="font-headline text-2xl font-bold text-foreground">{member.name}</h3>
+                  <p className="font-body text-base text-gradient-secondary">{member.title}</p>
+                </div>
               ))}
             </div>
           </div>

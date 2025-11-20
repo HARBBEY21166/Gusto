@@ -95,6 +95,30 @@
       "imageUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "set table",
       "price": ""
+    },
+    {
+      "id": "about-hero",
+      "title": "Kitchen Team",
+      "description": "A candid shot of the kitchen team working together.",
+      "imageUrl": "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "kitchen team",
+      "price": ""
+    },
+    {
+      "id": "about-chef",
+      "title": "Head Chef",
+      "description": "A portrait of the head chef.",
+      "imageUrl": "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1953&auto=format&fit=crop",
+      "imageHint": "head chef",
+      "price": ""
+    },
+    {
+      "id": "about-values",
+      "title": "Fresh Ingredients",
+      "description": "A shot of fresh, locally sourced ingredients.",
+      "imageUrl": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "fresh ingredients",
+      "price": ""
     }
   ]
 }

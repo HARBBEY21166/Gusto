@@ -7,6 +7,10 @@ import Footer from '@/components/layout/footer';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import { MapPin, Clock, Phone, Mail } from 'lucide-react';
 import Link from 'next/link';
 
@@ -107,6 +111,42 @@ export default function ContactPage() {
                 ></iframe>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-muted">
+          <div className="container mx-auto px-4">
+            <Card className="max-w-3xl mx-auto bg-card shadow-subtle border-none rounded-lg">
+              <CardHeader className="text-center">
+                <CardTitle className="font-headline text-4xl font-bold text-foreground">Send Us a Message</CardTitle>
+                <CardDescription className="font-body text-lg text-muted-foreground pt-2">
+                  Have a question? We'd love to hear from you.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="font-body">Full Name</Label>
+                    <Input id="name" type="text" placeholder="John Doe" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="font-body">Email Address</Label>
+                    <Input id="email" type="email" placeholder="john.doe@example.com" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="subject" className="font-body">Subject</Label>
+                    <Input id="subject" type="text" placeholder="e.g., Dietary Inquiry" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message" className="font-body">Message</Label>
+                    <Textarea id="message" placeholder="Your message..." rows={5} />
+                  </div>
+                  <Button type="submit" size="lg" className="w-full bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
           </div>
         </section>
 

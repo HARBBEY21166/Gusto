@@ -8,6 +8,7 @@ import Link from 'next/link';
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-dish');
   const featuredDishes = PlaceHolderImages.filter(p => p.id.startsWith('dish-'));
+  const storyImage = PlaceHolderImages.find(p => p.id === 'our-story-image');
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -59,7 +60,7 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {featuredDishes.map((dish) => (
-                <Card key={dish.id} className="bg-card overflow-hidden shadow-subtle border-none">
+                <Card key={dish.id} className="bg-card overflow-hidden shadow-subtle border-none rounded-lg">
                   <div className="relative aspect-square">
                     <Image
                       src={dish.imageUrl}
@@ -86,6 +87,37 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="py-20 bg-card">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-subtle">
+                {storyImage && (
+                    <Image
+                      src={storyImage.imageUrl}
+                      alt={storyImage.description}
+                      fill
+                      className="object-cover"
+                      data-ai-hint={storyImage.imageHint}
+                    />
+                )}
+              </div>
+              <div className="flex flex-col justify-center text-left">
+                <h2 className="font-headline text-4xl font-bold text-gradient-primary">
+                  Our Story
+                </h2>
+                <h3 className="font-body text-xl font-bold text-muted-foreground mt-2">A Journey of Flavor Since 2010</h3>
+                <p className="font-body text-base text-muted-foreground mt-4 max-w-prose">
+                  Founded on the belief that a great meal is a memorable experience, Gusto brings together family recipes and modern technique. We are passionate about supporting local farmers and showcasing the best our region has to offer.
+                </p>
+                <div className="mt-8">
+                   <Button asChild variant="outline" size="lg" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                     <Link href="/about">Learn More</Link>
+                   </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );

@@ -87,6 +87,14 @@
       "imageUrl": "https://images.unsplash.com/photo-1551024709-8f23befc6f81?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "cocktails",
       "price": ""
+    },
+    {
+      "id": "reservations-hero",
+      "title": "Set Table",
+      "description": "A beautifully set table waiting for guests.",
+      "imageUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "set table",
+      "price": ""
     }
   ]
 }

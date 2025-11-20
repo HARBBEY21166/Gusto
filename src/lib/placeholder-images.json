@@ -2,9 +2,35 @@
   "placeholderImages": [
     {
       "id": "hero-dish",
+      "title": "Hero Dish",
       "description": "A beautifully plated gourmet dish, showcasing culinary artistry.",
-      "imageUrl": "https://images.unsplash.com/photo-1676300184892-af5c95f9dbe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxnb3VybWV0JTIwZGlzaHxlbnwwfHx8fDE3NjM1NDM2MzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "gourmet dish"
+      "imageUrl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2080&auto=format&fit=crop",
+      "imageHint": "gourmet dish",
+      "price": ""
+    },
+    {
+      "id": "dish-1",
+      "title": "Seared Scallops",
+      "description": "Perfectly seared scallops with a lemon-butter sauce and fresh herbs.",
+      "imageUrl": "https://images.unsplash.com/photo-1763052088730-1b4c6bd3f590?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzZWFyZWQlMjBzY2FsbG9wc3xlbnwwfHx8fDE3NjM2MzEwMzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "seared scallops",
+      "price": "$28"
+    },
+    {
+      "id": "dish-2",
+      "title": "Ribeye Steak",
+      "description": "Aged ribeye steak cooked to perfection, served with roasted vegetables.",
+      "imageUrl": "https://images.unsplash.com/photo-1560781290-7dc94c0f8f4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxyaWJleWUlMjBzdGVha3xlbnwwfHx8fDE3NjM1NzE4MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ribeye steak",
+      "price": "$45"
+    },
+    {
+      "id": "dish-3",
+      "title": "Chocolate Lava Cake",
+      "description": "Decadent chocolate lava cake with a molten center and a scoop of vanilla ice cream.",
+      "imageUrl": "https://images.unsplash.com/photo-1638518963806-4d27451f3fa2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsYXZhJTIwY2FrZXxlbnwwfHx8fDE3NjM1NDc4MjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "lava cake",
+      "price": "$15"
     }
   ]
 }

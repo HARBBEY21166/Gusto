@@ -83,20 +83,37 @@ export default function LoginPage() {
                                 </CardContent>
                             </TabsContent>
                             <TabsContent value="signup">
-                                 <CardContent className="space-y-4 pt-6">
-                                 <div className="space-y-2">
-                                    <Label htmlFor="name-signup">Name</Label>
-                                    <Input id="name-signup" type="text" placeholder="John Doe" />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="email-signup">Email</Label>
-                                    <Input id="email-signup" type="email" placeholder="m@example.com" />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="password-signup">Password</Label>
-                                    <Input id="password-signup" type="password" />
-                                </div>
-                                <Button className="w-full bg-primary-gradient text-white font-bold">Create Your Account</Button>
+                                <CardContent className="space-y-4 pt-6 px-0 pb-0">
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                      <div className="space-y-2">
+                                          <Label htmlFor="first-name-signup">First Name</Label>
+                                          <Input id="first-name-signup" type="text" placeholder="John" />
+                                      </div>
+                                      <div className="space-y-2">
+                                          <Label htmlFor="last-name-signup">Last Name</Label>
+                                          <Input id="last-name-signup" type="text" placeholder="Doe" />
+                                      </div>
+                                  </div>
+                                  <div className="space-y-2">
+                                      <Label htmlFor="email-signup">Email Address</Label>
+                                      <Input id="email-signup" type="email" placeholder="john.doe@example.com" />
+                                  </div>
+                                  <div className="space-y-2">
+                                      <Label htmlFor="password-signup">Create Password</Label>
+                                      <Input id="password-signup" type="password" />
+                                  </div>
+                                  <Button className="w-full bg-primary-gradient text-white font-bold">Create Your Account</Button>
+                                  <p className="text-xs text-muted-foreground text-center pt-2">
+                                    By creating an account, you agree to our{' '}
+                                    <Link href="#" className="text-gradient-secondary hover:brightness-110 transition">
+                                      Privacy Policy
+                                    </Link>{' '}
+                                    and{' '}
+                                    <Link href="#" className="text-gradient-secondary hover:brightness-110 transition">
+                                      Terms of Service
+                                    </Link>
+                                    .
+                                  </p>
                                 </CardContent>
                             </TabsContent>
                         </Tabs>
@@ -109,5 +126,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-    

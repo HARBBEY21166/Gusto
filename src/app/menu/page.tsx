@@ -100,7 +100,9 @@ const MenuCategorySection = ({ id, title, items, image }: MenuCategory) => (
         <div className="mt-2 w-24 h-1 bg-primary-gradient mx-auto" />
       </div>
       <div className="grid lg:grid-cols-2 gap-12 items-start">
-        <div className="flex flex-col gap-8">
+        <div className={cn("flex flex-col gap-8", {
+          'lg:order-last': id === 'desserts',
+        })}>
           {items.map((item, index) => (
             <div key={index}>
               <div className="flex justify-between items-center">
@@ -116,7 +118,10 @@ const MenuCategorySection = ({ id, title, items, image }: MenuCategory) => (
             </div>
           ))}
         </div>
-        <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-subtle order-first lg:order-last">
+        <div className={cn("relative aspect-[4/3] rounded-lg overflow-hidden shadow-subtle order-first", {
+          'lg:order-first': id === 'desserts',
+          'lg:order-last': id !== 'desserts',
+        })}>
           {image && (
             <Image
               src={image.imageUrl}

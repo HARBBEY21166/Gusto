@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useInView } from '@/hooks/use-in-view';
-import { ThemeToggle } from '@/components/theme-toggle';
 
 const AnimatedCard = ({ children, className, delay }: { children: React.ReactNode, className?: string, delay?: number }) => {
   const { ref, inView } = useInView({
@@ -231,7 +230,6 @@ export default function Home() {
         </section>
       </main>
       <Footer />
-      <ThemeToggle />
     </div>
   );
 }

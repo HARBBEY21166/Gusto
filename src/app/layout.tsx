@@ -1,7 +1,9 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export const metadata: Metadata = {
   title: 'Gusto Navigation',
@@ -29,6 +31,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster />
+          <ThemeToggle />
         </ThemeProvider>
       </body>
     </html>

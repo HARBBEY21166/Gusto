@@ -179,6 +179,20 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="py-20 bg-primary-gradient text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="font-headline text-4xl font-bold">
+              Ready for an Unforgettable Evening?
+            </h2>
+            <p className="font-body text-lg text-gray-200 mt-4 mb-8 max-w-xl mx-auto">
+              Reserve your table online and secure your spot at Gusto.
+            </p>
+            <Button asChild size="lg" className="bg-secondary-gradient text-white font-bold hover:opacity-90 transition-opacity">
+              <Link href="/reservations">Reserve Now</Link>
+            </Button>
+          </div>
+        </section>
+
       </main>
     </div>
   );

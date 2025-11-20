@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import React from 'react';
@@ -56,6 +57,8 @@ const menuData: Omit<MenuCategory, 'image'>[] = [
       { name: 'Spaghetti Carbonara', description: 'Classic carbonara with pancetta, egg yolk, pecorino cheese, and black pepper.', price: '$24' },
       { name: 'Filetto di Manzo', description: 'Grilled beef tenderloin with a red wine reduction, served with asparagus.', price: '$42', tags: ['gf'] },
       { name: 'Risotto ai Funghi', description: 'Creamy risotto with wild mushrooms, parmesan, and truffle oil.', price: '$28', tags: ['v'] },
+      { name: 'Lasagna alla Bolognese', description: 'Layers of fresh pasta, rich meat sauce, béchamel, and Parmigiano-Reggiano.', price: '$26'},
+      { name: 'Pollo alla Cacciatora', description: 'Braised chicken with onions, herbs, tomatoes, and red wine.', price: '$32'},
     ]
   },
   {

@@ -1,7 +1,7 @@
 
 // This is an API service to connect to a backend.
 
-const API_BASE_URL = 'https://stunning-space-palm-tree-6q75jjg645p25g6w-5000.app.github.dev/api';
+const API_BASE_URL = 'https://gusto-restaurant-backend-production.up.railway.app/api';
 
 export const authAPI = {
   login: async (email: string, password?: string) => {

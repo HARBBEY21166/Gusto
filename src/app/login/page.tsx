@@ -128,15 +128,15 @@ export default function LoginPage() {
     }
   };
   
-  const testBackendConnection = async () => {
+  const testRailwayConnection = async () => {
     try {
-      const response = await fetch('https://stunning-space-palm-tree-6q75jjg645p25g6w-5000.app.github.dev/api');
+      const response = await fetch('https://gusto-restaurant-backend-production.up.railway.app/');
       const data = await response.json();
-      console.log('Backend connection test:', data);
-      alert('Backend is connected! Message: ' + data.message);
+      console.log('✅ Railway Backend Connection:', data);
+      alert('✅ Railway Backend Connected! Message: ' + data.message);
     } catch (error: any) {
-      console.error('Backend connection failed:', error);
-      alert('Backend connection failed: ' + error.message);
+      console.error('❌ Railway Connection Failed:', error);
+      alert('❌ Connection failed: ' + error.message);
     }
   };
 
@@ -218,8 +218,8 @@ export default function LoginPage() {
                                         Forgot your password?
                                       </Link>
                                     </div>
-                                    <Button type="button" variant="outline" className="w-full" onClick={testBackendConnection}>
-                                      Test Backend Connection
+                                    <Button type="button" variant="outline" className="w-full" onClick={testRailwayConnection}>
+                                      Test Railway Backend
                                     </Button>
                                     <Button type="submit" className="w-full bg-primary-gradient text-white font-bold">Sign In to Your Account</Button>
                                     <SocialButtons />

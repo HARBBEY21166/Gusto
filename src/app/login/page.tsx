@@ -127,6 +127,18 @@ export default function LoginPage() {
       });
     }
   };
+  
+  const testBackendConnection = async () => {
+    try {
+      const response = await fetch('https://stunning-space-palm-tree-6q75jjg645p25g6w-5000.app.github.dev/api');
+      const data = await response.json();
+      console.log('Backend connection test:', data);
+      alert('Backend is connected! Message: ' + data.message);
+    } catch (error: any) {
+      console.error('Backend connection failed:', error);
+      alert('Backend connection failed: ' + error.message);
+    }
+  };
 
 
   const heroContent = {
@@ -206,6 +218,9 @@ export default function LoginPage() {
                                         Forgot your password?
                                       </Link>
                                     </div>
+                                    <Button type="button" variant="outline" className="w-full" onClick={testBackendConnection}>
+                                      Test Backend Connection
+                                    </Button>
                                     <Button type="submit" className="w-full bg-primary-gradient text-white font-bold">Sign In to Your Account</Button>
                                     <SocialButtons />
                                   </CardContent>

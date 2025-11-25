@@ -8,7 +8,15 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, Users, UtensilsCrossed, PartyPopper } from 'lucide-react';
+import { Calendar, Clock, Users, UtensilsCrossed, PartyPopper, Star, History } from 'lucide-react';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+  } from "@/components/ui/table"
 
 export default function DashboardPage() {
   // Placeholder for dynamic user data
@@ -25,6 +33,56 @@ export default function DashboardPage() {
     status: 'Confirmed' as 'Confirmed' | 'Pending',
   };
   // const upcomingReservation = null;
+
+  // Placeholder for reservation history data.
+  const reservationHistory = [
+    {
+        id: 'res1',
+        date: 'Sat, Nov 18, 2023',
+        partySize: 2,
+        orderTotal: '$124.50',
+        rating: 5,
+    },
+    {
+        id: 'res2',
+        date: 'Fri, Oct 20, 2023',
+        partySize: 4,
+        orderTotal: '$210.00',
+        rating: 4,
+    },
+    {
+        id: 'res3',
+        date: 'Wed, Sep 12, 2023',
+        partySize: 1,
+        orderTotal: '$65.00',
+        rating: 5,
+    }
+  ];
+  // const reservationHistory: any[] = [];
+
+  const StarRating = ({ rating }: { rating: number }) => (
+    <div className="flex items-center gap-1">
+      {[...Array(5)].map((_, i) => {
+        const isFilled = i < rating;
+        return (
+          <Star
+            key={i}
+            className={`w-4 h-4 ${isFilled ? 'text-transparent' : 'text-muted-foreground/50'}`}
+            fill={isFilled ? 'url(#star-gradient)' : 'none'}
+            style={isFilled ? {} : { fillOpacity: 0.5 }}
+          />
+        );
+      })}
+       <svg width="0" height="0">
+            <defs>
+                <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style={{stopColor: '#f093fb'}} />
+                    <stop offset="100%" style={{stopColor: '#f5576c'}} />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+  );
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -114,6 +172,51 @@ export default function DashboardPage() {
                </Card>
             )}
           </div>
+        </section>
+
+        {/* Section 3: Reservation History */}
+        <section className="py-20 bg-muted">
+            <div className="container mx-auto px-4">
+                <div className="mb-12">
+                    <h2 className="font-headline text-4xl font-bold text-foreground">Dining History</h2>
+                    <p className="font-body text-lg text-muted-foreground mt-2">A look back at your memorable moments with us.</p>
+                </div>
+
+                {reservationHistory.length > 0 ? (
+                    <Card className="shadow-subtle border-none">
+                        <CardContent className="p-0">
+                            <Table>
+                                <TableHeader>
+                                <TableRow>
+                                    <TableHead className="font-body text-sm font-bold">Date</TableHead>
+                                    <TableHead className="font-body text-sm font-bold">Party Size</TableHead>
+                                    <TableHead className="font-body text-sm font-bold">Order Total</TableHead>
+                                    <TableHead className="font-body text-sm font-bold text-right">Rating</TableHead>
+                                </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                {reservationHistory.map((res) => (
+                                    <TableRow key={res.id} className="cursor-pointer hover:bg-muted/50">
+                                        <TableCell className="font-medium text-foreground">{res.date}</TableCell>
+                                        <TableCell className="text-muted-foreground">{res.partySize}</TableCell>
+                                        <TableCell className="text-muted-foreground">{res.orderTotal}</TableCell>
+                                        <TableCell className="text-right">
+                                            <StarRating rating={res.rating} />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                                </TableBody>
+                            </Table>
+                        </CardContent>
+                    </Card>
+                ) : (
+                    <Card className="flex flex-col items-center justify-center text-center p-12 border-dashed shadow-none">
+                        <History className="w-16 h-16 text-muted-foreground mb-4" />
+                        <h3 className="font-headline text-2xl font-bold text-foreground">No Dining History</h3>
+                        <p className="font-body text-muted-foreground mt-2">Your past reservations will appear here. Time to make some memories!</p>
+                    </Card>
+                )}
+            </div>
         </section>
 
       </main>

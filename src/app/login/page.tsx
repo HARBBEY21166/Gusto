@@ -54,15 +54,25 @@ const SocialButtons = () => (
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState('login');
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  
+  // Login form state
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+
+  // Signup form state
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+
+
   const { toast } = useToast();
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const result: any = await authAPI.login(email, password);
+      const result: any = await authAPI.login(loginEmail, loginPassword);
       
       if (result.success) {
         saveAuthData(result.data, result.data.token);
@@ -87,6 +97,37 @@ export default function LoginPage() {
       });
     }
   };
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const userData = { firstName, lastName, email: signupEmail, password: signupPassword };
+    try {
+      const result: any = await authAPI.signup(userData);
+      
+      if (result.success) {
+        saveAuthData(result.data, result.data.token);
+        toast({
+          title: 'Account Created!',
+          description: 'Redirecting you to your dashboard.',
+        });
+        router.push('/dashboard');
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Signup Failed',
+          description: result.message || 'Please check your details and try again.',
+        });
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Network Error',
+        description: 'Could not connect to the server. Please try again later.',
+      });
+    }
+  };
+
 
   const heroContent = {
     login: {
@@ -135,8 +176,8 @@ export default function LoginPage() {
                                           id="email-login" 
                                           type="email" 
                                           placeholder="m@example.com" 
-                                          value={email}
-                                          onChange={(e) => setEmail(e.target.value)}
+                                          value={loginEmail}
+                                          onChange={(e) => setLoginEmail(e.target.value)}
                                           required
                                         />
                                     </div>
@@ -147,8 +188,8 @@ export default function LoginPage() {
                                               id="password-login" 
                                               type={showPassword ? 'text' : 'password'} 
                                               className="pr-10"
-                                              value={password}
-                                              onChange={(e) => setPassword(e.target.value)}
+                                              value={loginPassword}
+                                              onChange={(e) => setLoginPassword(e.target.value)}
                                               required
                                             />
                                             <button
@@ -171,39 +212,68 @@ export default function LoginPage() {
                                 </form>
                             </TabsContent>
                             <TabsContent value="signup">
-                                <CardContent className="space-y-4 pt-6 px-0 pb-0">
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                      <div className="space-y-2">
-                                          <Label htmlFor="first-name-signup">First Name</Label>
-                                          <Input id="first-name-signup" type="text" placeholder="John" />
-                                      </div>
-                                      <div className="space-y-2">
-                                          <Label htmlFor="last-name-signup">Last Name</Label>
-                                          <Input id="last-name-signup" type="text" placeholder="Doe" />
-                                      </div>
-                                  </div>
-                                  <div className="space-y-2">
-                                      <Label htmlFor="email-signup">Email Address</Label>
-                                      <Input id="email-signup" type="email" placeholder="john.doe@example.com" />
-                                  </div>
-                                  <div className="space-y-2">
-                                      <Label htmlFor="password-signup">Create Password</Label>
-                                      <Input id="password-signup" type="password" />
-                                  </div>
-                                  <Button className="w-full bg-primary-gradient text-white font-bold">Create Your Account</Button>
-                                  <SocialButtons />
-                                  <p className="text-xs text-muted-foreground text-center pt-2">
-                                    By creating an account, you agree to our{' '}
-                                    <Link href="#" className="text-gradient-secondary hover:brightness-110 transition">
-                                      Privacy Policy
-                                    </Link>{' '}
-                                    and{' '}
-                                    <Link href="#" className="text-gradient-secondary hover:brightness-110 transition">
-                                      Terms of Service
-                                    </Link>
-                                    .
-                                  </p>
-                                </CardContent>
+                                <form onSubmit={handleSignup}>
+                                  <CardContent className="space-y-4 pt-6 px-0 pb-0">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="first-name-signup">First Name</Label>
+                                            <Input 
+                                              id="first-name-signup" 
+                                              type="text" 
+                                              placeholder="John" 
+                                              value={firstName}
+                                              onChange={(e) => setFirstName(e.target.value)}
+                                              required
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="last-name-signup">Last Name</Label>
+                                            <Input 
+                                              id="last-name-signup" 
+                                              type="text" 
+                                              placeholder="Doe" 
+                                              value={lastName}
+                                              onChange={(e) => setLastName(e.target.value)}
+                                              required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="email-signup">Email Address</Label>
+                                        <Input 
+                                          id="email-signup" 
+                                          type="email" 
+                                          placeholder="john.doe@example.com" 
+                                          value={signupEmail}
+                                          onChange={(e) => setSignupEmail(e.target.value)}
+                                          required
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="password-signup">Create Password</Label>
+                                        <Input 
+                                          id="password-signup" 
+                                          type="password" 
+                                          value={signupPassword}
+                                          onChange={(e) => setSignupPassword(e.target.value)}
+                                          required
+                                        />
+                                    </div>
+                                    <Button type="submit" className="w-full bg-primary-gradient text-white font-bold">Create Your Account</Button>
+                                    <SocialButtons />
+                                    <p className="text-xs text-muted-foreground text-center pt-2">
+                                      By creating an account, you agree to our{' '}
+                                      <Link href="#" className="text-gradient-secondary hover:brightness-110 transition">
+                                        Privacy Policy
+                                      </Link>{' '}
+                                      and{' '}
+                                      <Link href="#" className="text-gradient-secondary hover:brightness-110 transition">
+                                        Terms of Service
+                                      </Link>
+                                      .
+                                    </p>
+                                  </CardContent>
+                                </form>
                             </TabsContent>
                         </Tabs>
                     </CardHeader>

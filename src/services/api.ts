@@ -22,6 +22,27 @@ export const authAPI = {
       }, 1000);
     });
   },
+
+  signup: (userData: any) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const { email, password, firstName, lastName } = userData;
+        if (email && password && firstName && lastName) {
+          resolve({
+            success: true,
+            data: {
+              firstName,
+              lastName,
+              email,
+              token: 'fake-jwt-token-for-new-user',
+            },
+          });
+        } else {
+          resolve({ success: false, message: 'Please fill out all fields.' });
+        }
+      }, 1000);
+    });
+  }
 };
 
 export const saveAuthData = (userData: any, token: string) => {

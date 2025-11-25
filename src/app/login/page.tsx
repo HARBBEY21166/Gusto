@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
-import { authAPI, saveAuthData } from '@/services/api';
+import { authAPI, saveAuthData, type LoginData, type SignupData } from '@/services/api';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 
@@ -54,25 +54,36 @@ const SocialButtons = () => (
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState('login');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   
   // Login form state
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
+  const [loginData, setLoginData] = useState<LoginData>({ email: '', password: '' });
 
   // Signup form state
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [signupEmail, setSignupEmail] = useState('');
-  const [signupPassword, setSignupPassword] = useState('');
+  const [signupData, setSignupData] = useState<SignupData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
 
 
   const { toast } = useToast();
   const router = useRouter();
 
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  };
+  
+  const handleSignupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const result: any = await authAPI.login(loginEmail, loginPassword);
+      const result: any = await authAPI.login(loginData.email, loginData.password);
       
       if (result.success) {
         saveAuthData(result.data, result.data.token);
@@ -95,14 +106,16 @@ export default function LoginPage() {
         title: 'Network Error',
         description: 'Could not connect to the server. Please try again later.',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    const userData = { firstName, lastName, email: signupEmail, password: signupPassword };
+    setLoading(true);
     try {
-      const result: any = await authAPI.signup(userData);
+      const result: any = await authAPI.signup(signupData);
       
       if (result.success) {
         saveAuthData(result.data, result.data.token);
@@ -125,6 +138,8 @@ export default function LoginPage() {
         title: 'Network Error',
         description: 'Could not connect to the server. Please try again later.',
       });
+    } finally {
+      setLoading(false);
     }
   };
   
@@ -185,11 +200,12 @@ export default function LoginPage() {
                                     <div className="space-y-2">
                                         <Label htmlFor="email-login">Email Address</Label>
                                         <Input 
-                                          id="email-login" 
+                                          id="email-login"
+                                          name="email"
                                           type="email" 
                                           placeholder="m@example.com" 
-                                          value={loginEmail}
-                                          onChange={(e) => setLoginEmail(e.target.value)}
+                                          value={loginData.email}
+                                          onChange={handleLoginChange}
                                           required
                                         />
                                     </div>
@@ -198,10 +214,11 @@ export default function LoginPage() {
                                         <div className="relative">
                                             <Input 
                                               id="password-login" 
+                                              name="password"
                                               type={showPassword ? 'text' : 'password'} 
                                               className="pr-10"
-                                              value={loginPassword}
-                                              onChange={(e) => setLoginPassword(e.target.value)}
+                                              value={loginData.password}
+                                              onChange={handleLoginChange}
                                               required
                                             />
                                             <button
@@ -221,7 +238,9 @@ export default function LoginPage() {
                                     <Button type="button" variant="outline" className="w-full" onClick={testRailwayConnection}>
                                       Test Railway Backend
                                     </Button>
-                                    <Button type="submit" className="w-full bg-primary-gradient text-white font-bold">Sign In to Your Account</Button>
+                                    <Button type="submit" disabled={loading} className="w-full bg-primary-gradient text-white font-bold">
+                                      {loading ? 'Logging in...' : 'Sign In to Your Account'}
+                                    </Button>
                                     <SocialButtons />
                                   </CardContent>
                                 </form>
@@ -234,10 +253,11 @@ export default function LoginPage() {
                                             <Label htmlFor="first-name-signup">First Name</Label>
                                             <Input 
                                               id="first-name-signup" 
+                                              name="firstName"
                                               type="text" 
                                               placeholder="John" 
-                                              value={firstName}
-                                              onChange={(e) => setFirstName(e.target.value)}
+                                              value={signupData.firstName}
+                                              onChange={handleSignupChange}
                                               required
                                             />
                                         </div>
@@ -245,10 +265,11 @@ export default function LoginPage() {
                                             <Label htmlFor="last-name-signup">Last Name</Label>
                                             <Input 
                                               id="last-name-signup" 
+                                              name="lastName"
                                               type="text" 
                                               placeholder="Doe" 
-                                              value={lastName}
-                                              onChange={(e) => setLastName(e.target.value)}
+                                              value={signupData.lastName}
+                                              onChange={handleSignupChange}
                                               required
                                             />
                                         </div>
@@ -257,10 +278,11 @@ export default function LoginPage() {
                                         <Label htmlFor="email-signup">Email Address</Label>
                                         <Input 
                                           id="email-signup" 
+                                          name="email"
                                           type="email" 
                                           placeholder="john.doe@example.com" 
-                                          value={signupEmail}
-                                          onChange={(e) => setSignupEmail(e.target.value)}
+                                          value={signupData.email}
+                                          onChange={handleSignupChange}
                                           required
                                         />
                                     </div>
@@ -268,13 +290,16 @@ export default function LoginPage() {
                                         <Label htmlFor="password-signup">Create Password</Label>
                                         <Input 
                                           id="password-signup" 
+                                          name="password"
                                           type="password" 
-                                          value={signupPassword}
-                                          onChange={(e) => setSignupPassword(e.target.value)}
+                                          value={signupData.password}
+                                          onChange={handleSignupChange}
                                           required
                                         />
                                     </div>
-                                    <Button type="submit" className="w-full bg-primary-gradient text-white font-bold">Create Your Account</Button>
+                                    <Button type="submit" disabled={loading} className="w-full bg-primary-gradient text-white font-bold">
+                                      {loading ? 'Creating Account...' : 'Create Your Account'}
+                                    </Button>
                                     <SocialButtons />
                                     <p className="text-xs text-muted-foreground text-center pt-2">
                                       By creating an account, you agree to our{' '}

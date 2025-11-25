@@ -11,6 +11,9 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
+import { authAPI, saveAuthData } from '@/services/api';
+import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -51,6 +54,39 @@ const SocialButtons = () => (
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState('login');
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const result: any = await authAPI.login(email, password);
+      
+      if (result.success) {
+        saveAuthData(result.data, result.data.token);
+        toast({
+          title: 'Login Successful!',
+          description: 'Redirecting you to your dashboard.',
+        });
+        router.push('/dashboard');
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Login Failed',
+          description: result.message || 'Please check your credentials and try again.',
+        });
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Network Error',
+        description: 'Could not connect to the server. Please try again later.',
+      });
+    }
+  };
 
   const heroContent = {
     login: {
@@ -91,32 +127,48 @@ export default function LoginPage() {
                                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
                             </TabsList>
                             <TabsContent value="login">
-                                <CardContent className="space-y-6 pt-6 px-0 pb-0">
-                                  <div className="space-y-2">
-                                      <Label htmlFor="email-login">Email Address</Label>
-                                      <Input id="email-login" type="email" placeholder="m@example.com" />
-                                  </div>
-                                  <div className="space-y-2">
-                                      <Label htmlFor="password-login">Password</Label>
-                                      <div className="relative">
-                                          <Input id="password-login" type={showPassword ? 'text' : 'password'} className="pr-10" />
-                                          <button
-                                            type="button"
-                                            onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground hover:text-foreground"
-                                          >
-                                            {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                                          </button>
-                                      </div>
-                                  </div>
-                                  <div className="text-right">
-                                    <Link href="#" className="text-sm font-medium text-gradient-secondary hover:brightness-110 transition">
-                                      Forgot your password?
-                                    </Link>
-                                  </div>
-                                  <Button className="w-full bg-primary-gradient text-white font-bold">Sign In to Your Account</Button>
-                                  <SocialButtons />
-                                </CardContent>
+                                <form onSubmit={handleLogin}>
+                                  <CardContent className="space-y-6 pt-6 px-0 pb-0">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="email-login">Email Address</Label>
+                                        <Input 
+                                          id="email-login" 
+                                          type="email" 
+                                          placeholder="m@example.com" 
+                                          value={email}
+                                          onChange={(e) => setEmail(e.target.value)}
+                                          required
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="password-login">Password</Label>
+                                        <div className="relative">
+                                            <Input 
+                                              id="password-login" 
+                                              type={showPassword ? 'text' : 'password'} 
+                                              className="pr-10"
+                                              value={password}
+                                              onChange={(e) => setPassword(e.target.value)}
+                                              required
+                                            />
+                                            <button
+                                              type="button"
+                                              onClick={() => setShowPassword(!showPassword)}
+                                              className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground hover:text-foreground"
+                                            >
+                                              {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                      <Link href="#" className="text-sm font-medium text-gradient-secondary hover:brightness-110 transition">
+                                        Forgot your password?
+                                      </Link>
+                                    </div>
+                                    <Button type="submit" className="w-full bg-primary-gradient text-white font-bold">Sign In to Your Account</Button>
+                                    <SocialButtons />
+                                  </CardContent>
+                                </form>
                             </TabsContent>
                             <TabsContent value="signup">
                                 <CardContent className="space-y-4 pt-6 px-0 pb-0">

@@ -1,47 +1,47 @@
 
-// This is a mock API service to simulate authentication.
-// In a real application, this would make network requests to a backend.
+// This is an API service to connect to a backend.
+
+const API_BASE_URL = 'https://stunning-space-palm-tree-6q75jjg645p25g6w-5000.app.github.dev/api';
 
 export const authAPI = {
-  login: (email: string, password?: string) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        if (email && password) {
-          resolve({
-            success: true,
-            data: {
-              firstName: 'Jane',
-              lastName: 'Doe',
-              email: email,
-              token: 'fake-jwt-token-for-testing',
-            },
-          });
-        } else {
-          resolve({ success: false, message: 'Invalid credentials' });
-        }
-      }, 1000);
-    });
+  login: async (email: string, password?: string) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        return { success: false, message: data.message || 'Login failed' };
+      }
+      return { success: true, data };
+    } catch (error) {
+      console.error('Login API error:', error);
+      return { success: false, message: 'Could not connect to the server.' };
+    }
   },
 
-  signup: (userData: any) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const { email, password, firstName, lastName } = userData;
-        if (email && password && firstName && lastName) {
-          resolve({
-            success: true,
-            data: {
-              firstName,
-              lastName,
-              email,
-              token: 'fake-jwt-token-for-new-user',
-            },
-          });
-        } else {
-          resolve({ success: false, message: 'Please fill out all fields.' });
-        }
-      }, 1000);
-    });
+  signup: async (userData: any) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        return { success: false, message: data.message || 'Signup failed' };
+      }
+      return { success: true, data };
+    } catch (error) {
+      console.error('Signup API error:', error);
+      return { success: false, message: 'Could not connect to the server.' };
+    }
   }
 };
 
@@ -50,7 +50,8 @@ export const saveAuthData = (userData: any, token: string) => {
   try {
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('token', token);
-  } catch (error) {
+  } catch (error)
+    {
     console.error("Could not save auth data", error);
   }
 };

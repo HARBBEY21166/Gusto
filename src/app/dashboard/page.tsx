@@ -6,9 +6,9 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, Users, UtensilsCrossed, PartyPopper, Star, History } from 'lucide-react';
+import { Calendar, Clock, Users, UtensilsCrossed, PartyPopper, Star, History, User, Salad, Pencil } from 'lucide-react';
 import {
     Table,
     TableBody,
@@ -17,12 +17,24 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
 export default function DashboardPage() {
   // Placeholder for dynamic user data
   const user = {
     firstName: 'Jane',
+    lastName: 'Doe',
+    email: 'jane.doe@example.com',
+    phone: '(555) 555-1234',
   };
+
+  const preferences = [
+    { id: 'vegetarian', label: 'Vegetarian' },
+    { id: 'vegan', label: 'Vegan' },
+    { id: 'gluten-free', label: 'Gluten-Free' },
+    { id: 'nut-allergy', label: 'Nut Allergy' },
+  ];
 
   // Placeholder for upcoming reservations data.
   // Set to null to test the empty state.
@@ -217,6 +229,54 @@ export default function DashboardPage() {
                     </Card>
                 )}
             </div>
+        </section>
+
+        {/* Section 4: Profile & Preferences */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <Card className="shadow-subtle border-none">
+              <CardHeader>
+                <CardTitle className="font-headline text-4xl font-bold text-foreground">Profile & Preferences</CardTitle>
+                <CardDescription className="font-body text-lg text-muted-foreground pt-2">Manage your personal information and dining preferences.</CardDescription>
+              </CardHeader>
+              <CardContent className="p-6 pt-0">
+                <div className="grid md:grid-cols-2 gap-12">
+                  {/* Left Column: Profile */}
+                  <div className="flex flex-col gap-6">
+                    <h3 className="font-headline text-2xl font-bold text-foreground flex items-center gap-2"><User />Profile Details</h3>
+                    <div className="space-y-4 font-body text-base">
+                      <p><strong className="font-medium text-muted-foreground w-24 inline-block">First Name:</strong> {user.firstName}</p>
+                      <p><strong className="font-medium text-muted-foreground w-24 inline-block">Last Name:</strong> {user.lastName}</p>
+                      <p><strong className="font-medium text-muted-foreground w-24 inline-block">Email:</strong> {user.email}</p>
+                      <p><strong className="font-medium text-muted-foreground w-24 inline-block">Phone:</strong> {user.phone}</p>
+                    </div>
+                    <Button variant="outline" className="self-start">
+                      <Pencil className="mr-2 h-4 w-4"/>
+                      Edit Profile
+                    </Button>
+                  </div>
+                  {/* Right Column: Dietary Preferences */}
+                  <div className="flex flex-col gap-6">
+                    <h3 className="font-headline text-2xl font-bold text-foreground flex items-center gap-2"><Salad />Dietary Preferences</h3>
+                    <div className="space-y-4">
+                      {preferences.map((pref) => (
+                        <div key={pref.id} className="flex items-center space-x-2">
+                          <Checkbox id={pref.id} />
+                          <Label htmlFor={pref.id} className="font-body text-base">
+                            {pref.label}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="font-body text-sm text-muted-foreground">
+                      This helps us serve you better on your next visit.
+                    </p>
+                    <Button variant="outline" className="self-start">Save Preferences</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </section>
 
       </main>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import GustoLogo from './gusto-logo';
+import Image from 'next/image';
+import GustoLogo from '@/Gusto-logo.svg';
 
 type LogoProps = {
   className?: string;
@@ -11,11 +12,16 @@ const Logo = ({ className }: LogoProps) => {
     <Link
       href="/"
       className={cn(
-        "text-foreground",
+        "flex items-center text-foreground",
         className
       )}
     >
-      <GustoLogo className="h-8 w-auto text-foreground" />
+      <Image 
+        src={GustoLogo} 
+        alt="Gusto Logo" 
+        className="h-8 w-auto"
+        priority
+      />
       <span className="sr-only">Gusto Home</span>
     </Link>
   );

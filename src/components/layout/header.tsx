@@ -3,14 +3,18 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, User } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, User, LogOut, LayoutDashboard } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import Logo from '@/components/logo';
 import { Separator } from '../ui/separator';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { isLoggedIn, getCurrentUser, removeAuthData, type User as ApiUser } from '@/services/api';
+
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -37,6 +41,87 @@ const NavLink = ({ href, label, onClick }: { href: string; label: string, onClic
       {label}
     </Link>
   );
+};
+
+const UserNav = () => {
+    const [user, setUser] = useState<ApiUser | null>(null);
+    const [authChecked, setAuthChecked] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (isLoggedIn()) {
+            setUser(getCurrentUser());
+        }
+        setAuthChecked(true);
+    }, []);
+
+    const handleLogout = () => {
+        removeAuthData();
+        setUser(null);
+        router.push('/');
+        // Optionally, show a toast notification for successful logout
+    };
+
+    if (!authChecked) {
+        return null; // or a loading skeleton
+    }
+
+    if (user) {
+        return (
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                        <Avatar className="h-10 w-10">
+                            {/* Potential for user avatar image */}
+                            <AvatarFallback>{user.firstName.charAt(0)}{user.lastName.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                    <DropdownMenuLabel className="font-normal">
+                        <div className="flex flex-col space-y-1">
+                            <p className="text-sm font-medium leading-none">{user.firstName} {user.lastName}</p>
+                            <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                        </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                        <Link href="/dashboard">
+                            <LayoutDashboard className="mr-2 h-4 w-4" />
+                            <span>Dashboard</span>
+                        </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout}>
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Log out</span>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+        );
+    }
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" aria-label="Account">
+                    <User className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-48" align="end" forceMount>
+                <DropdownMenuItem asChild>
+                    <Link href="/login">
+                        Log In
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                    <Link href="/login">
+                        Sign Up
+                    </Link>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
 };
 
 
@@ -70,11 +155,7 @@ const Header = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Button asChild variant="ghost" size="icon" aria-label="Log In">
-              <Link href="/login">
-                <User className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
-              </Link>
-            </Button>
+            <UserNav />
             <Button asChild className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">
               <Link href="/reservations">Reserve a Table</Link>
             </Button>
@@ -104,7 +185,7 @@ const Header = () => {
                    <Button asChild variant="ghost" className="justify-start text-base">
                      <Link href="/login">
                        <User className="mr-2 h-5 w-5" />
-                       Log In
+                       Log In / Sign Up
                      </Link>
                    </Button>
                     <Button asChild className="bg-primary-gradient text-primary-foreground font-bold hover:opacity-90 transition-opacity">

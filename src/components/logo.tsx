@@ -19,7 +19,7 @@ const Logo = ({ className }: LogoProps) => {
       <Image 
         src={GustoLogo} 
         alt="Gusto Logo" 
-        className="h-8 w-auto dark:invert"
+        className="h-12 w-auto dark:invert"
         priority
       />
       <span className="sr-only">Gusto Home</span>

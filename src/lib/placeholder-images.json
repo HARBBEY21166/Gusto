@@ -60,7 +60,7 @@
       "id": "menu-appetizers",
       "title": "Appetizers Spread",
       "description": "A vibrant spread of delicious appetizers.",
-      "imageUrl": "https://images.unsplash.com/photo-1504754524776-8f4f37790774?q=80&w=2070&auto=format&fit=crop",
+      "imageUrl": "https://i.pinimg.com/736x/c8/c4/55/c8c455a3460322ffea0ea9ba7242c271.jpg",
       "imageHint": "appetizer spread",
       "price": ""
     },
@@ -68,7 +68,7 @@
       "id": "menu-main-courses",
       "title": "Main Course",
       "description": "A hearty main course beautifully plated.",
-      "imageUrl": "https://images.unsplash.com/photo-1559847844-5315695d0e66?q=80&w=1964&auto=format&fit=crop",
+      "imageUrl": "https://i.pinimg.com/736x/c6/d6/3a/c6d63a6782592f63de2002a16025aea7.jpg",
       "imageHint": "main course",
       "price": ""
     },
@@ -84,7 +84,7 @@
       "id": "menu-drinks",
       "title": "Cocktails",
       "description": "A refreshing and colorful cocktail.",
-      "imageUrl": "https://images.unsplash.com/photo-1551024709-8f23befc6f81?q=80&w=2070&auto=format&fit=crop",
+      "imageUrl": "https://i.pinimg.com/736x/88/11/df/8811dfcee35689724fd419f82198ae67.jpg",
       "imageHint": "cocktails",
       "price": ""
     },
@@ -100,7 +100,7 @@
       "id": "about-hero",
       "title": "Kitchen Team",
       "description": "A candid shot of the kitchen team working together.",
-      "imageUrl": "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2070&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1578366941741-9e517759c620?q=80&w=auto&auto=format&fit=crop",
       "imageHint": "kitchen team",
       "price": ""
     },
@@ -140,7 +140,7 @@
       "id": "about-tradition",
       "title": "Old Recipe Book",
       "description": "An old, handwritten recipe book, suggesting tradition and family history.",
-      "imageUrl": "https://images.unsplash.com/photo-1598515750917-ef8392c6d486?q=80&w=2070&auto=format&fit=crop",
+      "imageUrl": "https://images.unsplash.com/photo-1589152144820-692b189e0b34?q=80&w=auto&auto=format&fit=crop",
       "imageHint": "recipe book",
       "price": ""
     },
@@ -156,7 +156,7 @@
       "id": "team-general-manager",
       "title": "Isabella",
       "description": "General Manager",
-      "imageUrl": "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?q=80&w=800&h=800&fit=crop",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1698527167839-02bb12a80d12?q=80&w=800&h=800&fit=crop",
       "imageHint": "female manager",
       "price": ""
     },
@@ -164,8 +164,8 @@
       "id": "team-pastry-chef",
       "title": "Marco",
       "description": "Pastry Chef",
-      "imageUrl": "https://images.unsplash.com/photo-1559526350-659f0f97a54c?q=80&w=800&h=800&fit=crop",
-      "imageHint": "male pastry",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1661630495688-c0e75d70cdc6?q=80&w=800&h=800&fit=crop",
+      "imageHint": "female pastry",
       "price": ""
     }
   ]

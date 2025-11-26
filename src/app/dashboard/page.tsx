@@ -112,8 +112,7 @@ export default function DashboardPage() {
       <main className="flex-grow">
         {/* Section 1: Dashboard Hero & Welcome */}
         <section
-          className="pt-32 pb-16" // pt-32 to account for header
-          style={{ background: 'linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(var(--background)) 100%)' }}
+          className="pt-32 pb-16 bg-gradient-to-b from-muted to-background dark:from-[#121212] dark:to-[#1e1e1e]"
         >
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -181,7 +180,7 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
             ) : (
-               <Card className="flex flex-col items-center justify-center text-center p-12 border-dashed shadow-none">
+               <Card className="flex flex-col items-center justify-center text-center p-12 border-dashed shadow-none bg-muted/50 dark:bg-card/50">
                  <UtensilsCrossed className="w-16 h-16 text-muted-foreground mb-4" />
                  <h3 className="font-headline text-2xl font-bold text-foreground">No Upcoming Reservations</h3>
                  <p className="font-body text-muted-foreground mt-2 mb-6">Ready for your next experience? Book a table now.</p>
@@ -218,7 +217,7 @@ export default function DashboardPage() {
                                 </TableHeader>
                                 <TableBody>
                                 {reservationHistory.map((res) => (
-                                    <TableRow key={res.id} className="cursor-pointer hover:bg-muted/50">
+                                    <TableRow key={res.id} className="cursor-pointer hover:bg-muted/50 dark:hover:bg-muted/10">
                                         <TableCell className="font-medium text-foreground">{res.date}</TableCell>
                                         <TableCell className="text-muted-foreground">{res.partySize}</TableCell>
                                         <TableCell className="text-muted-foreground">{res.orderTotal}</TableCell>
@@ -232,7 +231,7 @@ export default function DashboardPage() {
                         </CardContent>
                     </Card>
                 ) : (
-                    <Card className="flex flex-col items-center justify-center text-center p-12 border-dashed shadow-none">
+                    <Card className="flex flex-col items-center justify-center text-center p-12 border-dashed shadow-none bg-muted/50 dark:bg-card/50">
                         <History className="w-16 h-16 text-muted-foreground mb-4" />
                         <h3 className="font-headline text-2xl font-bold text-foreground">No Dining History</h3>
                         <p className="font-body text-muted-foreground mt-2">Your past reservations will appear here. Time to make some memories!</p>

@@ -6,6 +6,7 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
+  phone?: string;
 }
 
 export interface AuthResponse {
@@ -36,6 +37,7 @@ const API_BASE_URL = 'https://gusto-restaurant-backend-production.up.railway.app
 
 // Helper function to get auth header
 const getAuthHeader = (): HeadersInit => {
+  if (typeof window === 'undefined') return {};
   const token = localStorage.getItem('token');
   return token ? { 'Authorization': `Bearer ${token}` } : {};
 };
@@ -79,23 +81,29 @@ export const authAPI = {
 
 // Save auth data to localStorage
 export const saveAuthData = (user: User, token: string): void => {
+  if (typeof window === 'undefined') return;
   localStorage.setItem('user', JSON.stringify(user));
   localStorage.setItem('token', token);
 };
 
 // Remove auth data (logout)
 export const removeAuthData = (): void => {
+  if (typeof window === 'undefined') return;
   localStorage.removeItem('user');
   localStorage.removeItem('token');
 };
 
 // Check if user is logged in
 export const isLoggedIn = (): boolean => {
+  if (typeof window === 'undefined') return false;
   return !!localStorage.getItem('token');
 };
 
 // Get current user from localStorage
 export const getCurrentUser = (): User | null => {
+  if (typeof window === 'undefined') return null;
   const userStr = localStorage.getItem('user');
   return userStr ? JSON.parse(userStr) : null;
 };
+
+    

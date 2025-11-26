@@ -1,7 +1,7 @@
 
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
@@ -19,15 +19,25 @@ import {
   } from "@/components/ui/table"
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { getCurrentUser, type User as ApiUser } from '@/services/api';
+
+interface UserData extends ApiUser {
+  phone?: string;
+}
+
 
 export default function DashboardPage() {
-  // Placeholder for dynamic user data
-  const user = {
-    firstName: 'Jane',
-    lastName: 'Doe',
-    email: 'jane.doe@example.com',
-    phone: '(555) 555-1234',
-  };
+  const [user, setUser] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+    if (currentUser) {
+      setUser({
+        ...currentUser,
+        phone: currentUser.phone || '(555) 555-1234' // Add placeholder phone
+      });
+    }
+  }, []);
 
   const preferences = [
     { id: 'vegetarian', label: 'Vegetarian' },
@@ -109,7 +119,7 @@ export default function DashboardPage() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div>
                 <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">
-                  Welcome back, {user.firstName}!
+                  Welcome back, {user?.firstName || 'Guest'}!
                 </h1>
                 <p className="font-body text-lg text-muted-foreground mt-2">
                   Manage your reservations, view your history, and update your preferences.
@@ -244,12 +254,16 @@ export default function DashboardPage() {
                   {/* Left Column: Profile */}
                   <div className="flex flex-col gap-6">
                     <h3 className="font-headline text-2xl font-bold text-foreground flex items-center gap-2"><User />Profile Details</h3>
-                    <div className="space-y-4 font-body text-base">
-                      <p><strong className="font-medium text-muted-foreground w-24 inline-block">First Name:</strong> {user.firstName}</p>
-                      <p><strong className="font-medium text-muted-foreground w-24 inline-block">Last Name:</strong> {user.lastName}</p>
-                      <p><strong className="font-medium text-muted-foreground w-24 inline-block">Email:</strong> {user.email}</p>
-                      <p><strong className="font-medium text-muted-foreground w-24 inline-block">Phone:</strong> {user.phone}</p>
-                    </div>
+                    {user ? (
+                      <div className="space-y-4 font-body text-base">
+                        <p><strong className="font-medium text-muted-foreground w-24 inline-block">First Name:</strong> {user.firstName}</p>
+                        <p><strong className="font-medium text-muted-foreground w-24 inline-block">Last Name:</strong> {user.lastName}</p>
+                        <p><strong className="font-medium text-muted-foreground w-24 inline-block">Email:</strong> {user.email}</p>
+                        <p><strong className="font-medium text-muted-foreground w-24 inline-block">Phone:</strong> {user.phone}</p>
+                      </div>
+                    ) : (
+                      <p>Loading user data...</p>
+                    )}
                     <Button variant="outline" className="self-start">
                       <Pencil className="mr-2 h-4 w-4"/>
                       Edit Profile
@@ -284,3 +298,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+    
